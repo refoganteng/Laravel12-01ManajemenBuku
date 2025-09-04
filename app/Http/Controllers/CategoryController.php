@@ -12,7 +12,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $allCategory = Category::all();
+        $allCategory = Category::all(); //Model Category sudah harus ada
         return view('category.index', compact('allCategory'));
     }
 
@@ -73,7 +73,7 @@ class CategoryController extends Controller
         $category->update($validated_data);
 
         //redirect ke category.index
-        return redirect()->route('category.index');
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -85,6 +85,6 @@ class CategoryController extends Controller
         $category->delete();
 
         //redirect ke category.index
-        return redirect()->route('category.index');
+        return redirect()->route('categories.index');
     }
 }
