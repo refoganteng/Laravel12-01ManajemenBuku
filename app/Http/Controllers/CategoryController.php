@@ -45,7 +45,7 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show(Category $book)
     {
         return view('category.show', compact('category'));
     }
@@ -53,7 +53,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $category)
+    public function edit(Category $book)
     {
         return view('category.edit', compact('category'));
     }
@@ -61,16 +61,16 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Category $book)
     {
         //validasi
         $validated_data = $request->validate([
-            'name' => 'required|max:15|unique:categories,name,' . $category->id,
+            'name' => 'required|max:15|unique:categories,name,' . $book->id,
             'description' => 'required|max:100',
         ]);
 
         //update
-        $category->update($validated_data);
+        $book->update($validated_data);
 
         //redirect ke category.index
         return redirect()->route('categories.index');
@@ -79,10 +79,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $category)
+    public function destroy(Category $book)
     {
         //hapus
-        $category->delete();
+        $book->delete();
 
         //redirect ke category.index
         return redirect()->route('categories.index');

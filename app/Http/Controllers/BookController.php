@@ -13,8 +13,8 @@ class BookController extends Controller
      */
     public function index()
     {
-        $allCategory = Category::all(); //Model Category sudah harus ada
-        return view('book.index', compact('allCategory'));
+        $allBook = Book::all(); //Model Category sudah harus ada
+        return view('book.index', compact('allBook'));
     }
 
     /**

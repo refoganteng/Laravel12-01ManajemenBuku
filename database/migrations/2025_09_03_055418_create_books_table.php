@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title'); //judul buku
             $table->string('slug')->unique(); //slug buku
-            $table->year('yer_published');
+            $table->year('year_published');
 
             $table->foreignId('author_id')->constrained(
                 table: 'users',

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthorController extends Controller
@@ -11,7 +12,8 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        //
+        $allAuthor = User::all(); //Model Category sudah harus ada
+        return view('author.index', compact('allAuthor'));
     }
 
     /**
