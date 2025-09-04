@@ -31,7 +31,8 @@ class CategoryController extends Controller
     {
         //validasi
         $validated_data = $request->validate([
-            'name' => 'required|max:15|unique:categories,name',
+            'name' => 'required|max:35|unique:categories,name',
+            'slug' => 'required|max:35|unique:categories,slug',
             'description' => 'required|max:100',
         ]);
 
@@ -39,13 +40,13 @@ class CategoryController extends Controller
         Category::create($validated_data);
 
         //redirect ke category.index
-        return redirect()->route('category.index');
+        return redirect()->route('categories.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Category $book)
+    public function show(Category $category)
     {
         return view('category.show', compact('category'));
     }
@@ -53,7 +54,7 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Category $book)
+    public function edit(Category $category)
     {
         return view('category.edit', compact('category'));
     }
@@ -61,16 +62,18 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Category $book)
+    public function update(Request $request, Category $category)
     {
         //validasi
         $validated_data = $request->validate([
-            'name' => 'required|max:15|unique:categories,name,' . $book->id,
+            'name' => 'required|max:15|unique:categories,name,' . $category->id,
+            'slug' => 'required|max:35|unique:categories,slug,' . $category->id,
             'description' => 'required|max:100',
         ]);
 
+
         //update
-        $book->update($validated_data);
+        $category->update($validated_data);
 
         //redirect ke category.index
         return redirect()->route('categories.index');
@@ -79,10 +82,10 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Category $book)
+    public function destroy(Category $category)
     {
         //hapus
-        $book->delete();
+        $category->delete();
 
         //redirect ke category.index
         return redirect()->route('categories.index');

@@ -20,17 +20,17 @@ return new class extends Migration
             $table->foreignId('author_id')->constrained(
                 table: 'users',
                 indexName: 'books_author_id'
-            )->onUpdate('cascade')->onDelete('restrict'); //penulis buku [relasi ke kolom username di table users]
+            )->onUpdate('cascade')->onDelete('cascade'); //penulis buku [relasi ke kolom username di table users]
 
             $table->foreignId('category_id')->constrained(
                 table: 'categories',
                 indexName: 'books_category_id'
-            )->onUpdate('cascade')->onDelete('restrict'); //kategori buku [relasi ke kolom name di table categories]
+            )->onUpdate('cascade')->onDelete('cascade'); //kategori buku [relasi ke kolom name di table categories]
 
             $table->foreignId('publisher_id')->constrained(
                 table: 'publishers',
                 indexName: 'books_publisher_id'
-            )->onUpdate('cascade')->onDelete('restrict'); //kategori buku [relasi ke kolom name di table categories]
+            )->onUpdate('cascade')->onDelete('cascade'); //kategori buku [relasi ke kolom name di table categories]
         
             $table->timestamps();
         });

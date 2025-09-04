@@ -1,14 +1,6 @@
 <nav class="bg-white shadow-md rounded-lg mb-5">
     <ul class="flex space-x-6 px-6 py-4 font-semibold text-gray-600">
         <li>
-            <a href="/"
-                class="{{ request()->is('/') 
-                ? 'bg-gray-200 text-indigo-600 font-semibold px-3 py-2 rounded-lg' 
-                : 'text-gray-600 hover:text-indigo-600 px-3 py-2 rounded-lg' }}">
-                Home
-            </a>
-        </li>
-        <li>
             <a href="/books"
                 class="{{ request()->is('books*') 
                 ? 'bg-gray-200 text-indigo-600 font-semibold px-3 py-2 rounded-lg' 

@@ -1,10 +1,10 @@
 <x-layout>
-   <section>
+    <section>
         <div class="flex items-center justify-between mb-4">
-            <h3 class="text-2xl font-bold text-gray-700">Author</h3>
-            <a href="{{ route('categories.create') }}"
+            <h3 class="text-2xl font-bold text-gray-700">Publisher</h3>
+            <a href="{{ route('publishers.create') }}"
                 class="px-4 py-2 bg-indigo-600 text-white rounded-lg shadow hover:bg-indigo-700 transition">
-                Add Author
+                Add Publisher
             </a>
         </div>
         <div class="overflow-x-auto bg-white shadow-lg rounded-lg">
@@ -50,5 +50,5 @@
                 </tbody>
             </table>
         </div>
-    </section> 
+    </section>
 </x-layout>

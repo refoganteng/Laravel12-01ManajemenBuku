@@ -12,7 +12,7 @@ class PublisherController extends Controller
      */
     public function index()
     {
-        $allPublisher = Publisher::all();
+        $allPublisher = Publisher::all(); //Model Publisher sudah harus ada
         return view('publisher.index', compact('allPublisher'));
     }
 
@@ -21,7 +21,7 @@ class PublisherController extends Controller
      */
     public function create()
     {
-        //
+        return view('publisher.create');
     }
 
     /**
@@ -29,7 +29,19 @@ class PublisherController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi
+        $validated_data = $request->validate([
+            'name' => 'required|max:35|unique:publishers,name',
+            'slug' => 'required|max:35|unique:publishers,slug',
+            'address' => 'required|max:100',
+            'phone' => 'required|max:13',
+        ]);
+
+        //simpan
+        Publisher::create($validated_data);
+
+        //redirect ke Publisher.index
+        return redirect()->route('publishers.index');
     }
 
     /**
@@ -37,7 +49,7 @@ class PublisherController extends Controller
      */
     public function show(Publisher $publisher)
     {
-        //
+        return view('publisher.show', compact('publisher'));
     }
 
     /**
@@ -45,7 +57,7 @@ class PublisherController extends Controller
      */
     public function edit(Publisher $publisher)
     {
-        //
+        return view('publisher.edit', compact('publisher'));
     }
 
     /**
@@ -53,7 +65,20 @@ class PublisherController extends Controller
      */
     public function update(Request $request, Publisher $publisher)
     {
-        //
+        //validasi
+        $validated_data = $request->validate([
+            'name' => 'required|max:15|unique:publishers,name,' . $publisher->id,
+            'slug' => 'required|max:35|unique:publishers,slug,' . $publisher->id,
+            'address' => 'required|max:100',
+            'phone' => 'required|max:13',
+        ]);
+
+
+        //update
+        $publisher->update($validated_data);
+
+        //redirect ke Publisher.index
+        return redirect()->route('publishers.index');
     }
 
     /**
@@ -61,6 +86,10 @@ class PublisherController extends Controller
      */
     public function destroy(Publisher $publisher)
     {
-        //
+        //hapus
+        $publisher->delete();
+
+        //redirect ke Publisher.index
+        return redirect()->route('publishers.index');
     }
 }

@@ -12,7 +12,7 @@ class AuthorController extends Controller
      */
     public function index()
     {
-        $allAuthor = User::all(); //Model Category sudah harus ada
+        $allAuthor = User::all(); //Model author sudah harus ada
         return view('author.index', compact('allAuthor'));
     }
 
@@ -21,7 +21,7 @@ class AuthorController extends Controller
      */
     public function create()
     {
-        //
+        return view('author.create');
     }
 
     /**
@@ -29,38 +29,66 @@ class AuthorController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi
+        $validated_data = $request->validate([
+            'name' => 'required|max:35|unique:users,name',
+            'username' => 'required|max:35|unique:users,username',
+            'email' => 'required|max:100',
+            'password' => 'required|max:20',
+        ]);
+
+        //simpan
+        User::create($validated_data);
+
+        //redirect ke author.index
+        return redirect()->route('authors.index');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $author)
     {
-        //
+        return view('author.show', compact('author'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(User $author)
     {
-        //
+        return view('author.edit', compact('author'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, User $author)
     {
-        //
+        //validasi
+        $validated_data = $request->validate([
+            'name' => 'required|max:15|unique:users,name,' . $author->id,
+            'username' => 'required|max:35|unique:users,username,' . $author->id,
+            'email' => 'required|max:100',
+        ]);
+
+
+        //update
+        $author->update($validated_data);
+
+        //redirect ke author.index
+        return redirect()->route('authors.index');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(User $author)
     {
-        //
+        //hapus
+        $author->delete();
+
+        //redirect ke author.index
+        return redirect()->route('authors.index');
     }
 }
